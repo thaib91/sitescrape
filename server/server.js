@@ -14,13 +14,14 @@ const siteUrl = "https://toronto.iabc.com/about/pic/pic-member-list/";
     const siteData = await page.evaluate(()=>{
         const pageData = [];
         //get page elements
-        const pageElms = document.querySelectorAll('body > div.site-container > div.site-inner > div > main > article > div');
+        const pageElms = document.querySelectorAll('body > div.site-container > div.site-inner');
 
         //parse data from elements
         pageElms.forEach((element)=>{
             const pageJson = {};
             try{
-                pageJson.name = element.querySelector('body > div.site-container > div.site-inner > div > main > article > div > div:nth-child(5) > div:nth-child(1) > div > strong > a').innerHTML;
+                pageJson.name = element.querySelector('.su-column-inner.su-clearfix').innerText;
+
 
             }catch(err){
                 console.log(err)
