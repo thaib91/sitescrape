@@ -15,8 +15,8 @@ const siteUrl = "https://toronto.iabc.com/about/pic/pic-member-list/";
     const pageData = [];
     //get page elements
     const pageElms = document.querySelectorAll(
-      "body > div.site-container > div.site-inner > div > main > article"
-    );
+        "body > div.site-container > div.site-inner > div > main > article > div > div.su-row"
+      );
     let num = 3;
 
     //parse data from elements
@@ -27,9 +27,7 @@ const siteUrl = "https://toronto.iabc.com/about/pic/pic-member-list/";
         if (nextPerson > 50) {
           return pageData;
         }
-        pageJson.name = element.querySelector(
-          `body > div.site-container > div.site-inner > div > main > article > div > div:nth-child(${nextPerson}) > div:nth-child(1) > div`
-        ).innerText;
+        pageJson.data = element.innerText;
 
         scraper();
       } catch (err) {
