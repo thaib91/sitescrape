@@ -8,7 +8,7 @@ const siteUrl = "https://toronto.iabc.com/about/pic/pic-member-list/";
     const page = await browser.newPage();
     await page.setViewport({width: 1920, height: 926});
     await page.goto(siteUrl);
-    await page.waitForSelector("body > div.site-container > div.site-inner > div > main > article > div")
+    // await page.waitForSelector("body > div.site-container > div.site-inner > div > main > article > div")
 
     // const siteData = await page.evaluate(()=>{
     //     const dataNodeList = document.querySelectorAll('body > div.site-container > div.site-inner > div > main > article > div')
@@ -28,18 +28,6 @@ const siteUrl = "https://toronto.iabc.com/about/pic/pic-member-list/";
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     //getting details of member list
 
     const siteData = await page.evaluate(()=>{
@@ -48,11 +36,17 @@ const siteUrl = "https://toronto.iabc.com/about/pic/pic-member-list/";
         const pageElms = document.querySelectorAll('body > div.site-container > div.site-inner > div > main > article');
 
         //parse data from elements
-        pageElms.forEach((element)=>{
+       const scraper = pageElms.forEach((element)=>{
+            let num = 3;
+            let nextPerson = num += 2
             const pageJson = {};
-            try{
-                pageJson.name = element.querySelectorAll('div .su-row').innerText;
-
+            try{ 
+                if(nextPerson > 50){
+                    return pageData
+                }
+                pageJson.name = element.querySelector(`body > div.site-container > div.site-inner > div > main > article > div > div:nth-child(${nextPerson}) > div:nth-child(1) > div`).innerText;
+                
+                scraper()
 
             }catch(err){
                 console.log(err)
@@ -61,7 +55,14 @@ const siteUrl = "https://toronto.iabc.com/about/pic/pic-member-list/";
             console.log(pageData)
         }) ;
         return pageData;
+
     })
     console.dir(siteData)
 
 })();
+
+//**********Try adding an if statement that conditions when to stop or continue */
+
+//body > div.site-container > div.site-inner > div > main > article > div > div:nth-child(5) > div:nth-child(1) > div
+//body > div.site-container > div.site-inner > div > main > article > div > div:nth-child(7) > div:nth-child(1) > div
+//body > div.site-container > div.site-inner > div > main > article > div > div:nth-child(9) > div:nth-child(1) > div
