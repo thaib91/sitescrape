@@ -42,25 +42,3 @@ const siteUrl = "https://toronto.iabc.com/about/pic/pic-member-list/";
   });
   console.dir(siteData);
 })();
-
-
-//**********Try adding an if statement that conditions when to stop or continue ****************/
-
-//body > div.site-container > div.site-inner > div > main > article > div > div:nth-child(5) > div:nth-child(1) > div
-//body > div.site-container > div.site-inner > div > main > article > div > div:nth-child(7) > div:nth-child(1) > div
-//body > div.site-container > div.site-inner > div > main > article > div > div:nth-child(9) > div:nth-child(1) > div
-
-// await page.waitForSelector("body > div.site-container > div.site-inner > div > main > article > div")
-
-// const siteData = await page.evaluate(()=>{
-//     const dataNodeList = document.querySelectorAll('body > div.site-container > div.site-inner > div > main > article > div')
-//     const nameList = document.querySelectorAll('div.su-column-inner.su-clearfix > strong > a')
-//     const pageData = [];
-
-//     for (let i = 0; i < dataNodeList.length; i++){
-//         pageData[i] = {
-//             name: nameList[i].innerText
-//         }
-//     }
-//     console.log(pageData)
-// });
