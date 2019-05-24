@@ -1,5 +1,6 @@
 const { SERVER_PORT } = process.env;
 const puppeteer = require("puppeteer");
+const ObjectsToCsv = require('objects-to-csv');
 
 const siteUrl = "https://toronto.iabc.com/about/pic/pic-member-list/";
 
@@ -40,6 +41,13 @@ const siteUrl = "https://toronto.iabc.com/about/pic/pic-member-list/";
   });
   console.dir(siteData);
 })();
+
+(async() => {
+    let csv = new ObjectsToCsv(siteData);
+    await csv.toDisk('./test.csv');
+    console.log(await csv.toString());
+})();
+
 
 //**********Try adding an if statement that conditions when to stop or continue ****************/
 
