@@ -19,19 +19,13 @@ const siteUrl = "https://toronto.iabc.com/about/pic/pic-member-list/";
     const pageElms = document.querySelectorAll(
         "body > div.site-container > div.site-inner > div > main > article > div > div.su-row"
       );
-    let num = 3;
-
     //parse data from elements
     const scraper = pageElms.forEach(element => {
-      let nextPerson = (num += 2);
       const pageJson = {};
       try {
-        if (nextPerson > 50) {
-          return pageData;
-        }
+
         pageJson.data = element.innerText;
 
-        scraper();
       } catch (err) {
         console.log(err);
       }
