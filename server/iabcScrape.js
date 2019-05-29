@@ -1,8 +1,20 @@
 // const { SERVER_PORT } = process.env;
 const puppeteer = require("puppeteer");
 // const ObjectsToCsv = require('objects-to-csv');
+const { convertArrayToCSV } = require("convert-array-to-csv");
+const converter = require("convert-array-to-csv");
 
 const siteUrl = "https://toronto.iabc.com/about/pic/pic-member-list/";
+const header = [
+  "name",
+  "company",
+  "address",
+  "location",
+  "tel",
+  "web",
+  "twit",
+  "summary"
+];
 
 (async () => {
   const browser = await puppeteer.launch({ headless: true });
@@ -18,34 +30,30 @@ const siteUrl = "https://toronto.iabc.com/about/pic/pic-member-list/";
     const emailData = [];
     //get page elements
     const pageElms = document.querySelectorAll(
-        "body > div.site-container > div.site-inner > div > main > article > div > div.su-row"
-      );
+      "body > div.site-container > div.site-inner > div > main > article > div > div.su-row"
+    );
     //parse data from elements
     pageElms.forEach(element => {
       const pageJson = {};
       const emailJson = {};
       try {
         pageJson.data = element.innerText;
-        emailJson.data = element.innerHTML
-
-
+        emailJson.data = element.innerHTML;
       } catch (err) {
         console.log(err);
       }
       pageData.push(pageJson);
-        //  emailData.push(emailJson)
+      //  emailData.push(emailJson)
     });
-       return pageData;
+    return pageData;
     //    return emailData;
   });
-  siteData.forEach((el, i )=> {
-      const splitArr = []
-      splitArr.push(el.data)
-    //   console.dir(splitArr)
-      console.log(splitArr[0].split("\n"))
-  })
-//   console.dir(siteData)
-//   console.log(siteData[0].data.split("\n"))
-//   console.dir(siteData);
-
+  siteData.forEach((el, i) => {
+    const splitArr = [];
+    splitArr.push(el.data);
+    console.log(splitArr[0].split("\n"));
+  });
+  // console.dir(siteData)
+  convertArrayToCSV(siteData[0].data.split("\n"), { header, separator: ";" });
+  //   console.dir(siteData);
 })();
