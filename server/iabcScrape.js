@@ -15,6 +15,7 @@ const header = [
   "twit",
   "summary"
 ];
+var data;
 
 (async () => {
   const browser = await puppeteer.launch({ headless: true });
@@ -51,9 +52,13 @@ const header = [
   siteData.forEach((el, i) => {
     const splitArr = [];
     splitArr.push(el.data);
-    console.log(splitArr[0].split("\n"));
+    console.log(JSON.stringify(splitArr[0].split("\n")));
   });
-  // console.dir(siteData)
-  convertArrayToCSV(siteData[0].data.split("\n"), { header, separator: ";" });
-  //   console.dir(siteData);
+  const data = siteData[0].data.split("\n");
+  convertArrayToCSV(data, { header, separator: ";" });
+//   console.log(csv)
+//   console.dir(data, "This is a sample");
 })();
+
+
+
